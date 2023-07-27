@@ -1,6 +1,6 @@
 import torch
 from utils import use_cuda, resume_checkpoint
-from decay_engine import Engine
+from engine import Engine
 
 #Ex2Vec Class
 class Ex2Vec(torch.nn.Module):
