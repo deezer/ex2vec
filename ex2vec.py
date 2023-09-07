@@ -35,8 +35,6 @@ class Ex2Vec(torch.nn.Module):
             num_embeddings=self.n_items, embedding_dim=self.latent_d
         )
 
-        #self.affine_output = torch.nn.Linear(in_features=self.latent_d, out_features=1)
-
         self.logistic = torch.nn.Sigmoid()
 
   
@@ -51,12 +49,11 @@ class Ex2Vec(torch.nn.Module):
 
         difference = torch.sub(item_embeddings, user_embeddings)
         base_distance = torch.sqrt((difference**2)).sum(axis=1) 
-        #base_distance = self.affine_output(base_distance).squeeze(-1)
         
         #compute the base_level activation 
         #get only time gaps superior to zero
         mask = (r_interval > 0).float()
-        delta_t = r_interval * (24.) *  mask
+        delta_t = r_interval *  mask
         
         delta_t = delta_t + self.cutoff.clamp(min=0.1, max=100)
         decay = 0.5#self.decay.clamp(min = 0.01, max = 10)
