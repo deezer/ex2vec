@@ -67,7 +67,7 @@ def get_n_users_items():
 
 
 # build the training set
-def instance_a_train_loader(num_negatives, batch_size):
+def instance_a_train_loader(batch_size):
     users, items, rel_int, interests = [], [], [], []
     train_stream = (
         df_train.copy()
