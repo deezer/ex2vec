@@ -44,6 +44,15 @@ df_train = df[(df["set"] == 'train')].copy()
 
 print("The size of the training set is: {}".format(len(df_train)))
 
+#get the negative items for every user
+#df_negative = (
+#    df.groupby("userId")["itemId"].apply(set).reset_index(name="interacted_items")
+#)
+#df_negative["negative_items"] = df_negative["interacted_items"].apply(
+#    lambda x: item_pool - x
+#)
+
+
 #function that returns the train and test set
 def get_train_test_val():
     return df_test, df_train, df_val
@@ -52,14 +61,14 @@ def get_train_test_val():
 def get_n_users_items():
     return df.userId.nunique(), df.itemId.nunique()
 
-def get_negatives():
-    return df_negative
+#def get_negatives():
+#    return df_negative
 
 
 #build the training set
 def instance_a_train_loader(num_negatives, batch_size):
     users, items, rel_int, interests = [], [], [],  []
-    train_stream = df_train.merge(df_negative[["userId", "negative_items"]], on="userId")
+    train_stream = df_train.copy()#merge(df_negative[["userId", "negative_items"]], on="userId")
     
     for row in train_stream.itertuples():
         users.append(int(row.userId))
