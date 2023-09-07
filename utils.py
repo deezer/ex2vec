@@ -42,5 +42,7 @@ def use_optimizer(network, params):
             momentum=params["rmsprop_momentum"],
         )
     else:
-        raise ValueError(f'{params.get("optimizer", None)} is not allow as optimizer value')
+        raise ValueError(
+            f'{params.get("optimizer", None)} is not allow as optimizer value'
+        )
     return optimizer

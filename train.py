@@ -1,6 +1,5 @@
-from ex2vec import Ex2VecEngine
-
 import data_sampler
+from ex2vec import Ex2VecEngine
 
 n_user, n_item = data_sampler.get_n_users_items()
 
