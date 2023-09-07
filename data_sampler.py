@@ -31,23 +31,9 @@ class InteractionDataset(Dataset):
         return self.user_tensor.size(0)
     
 
-data_path = "data/new_SLRC_CR_30K_train_test_val.csv"
+data_path = "data/processed.csv"
 
 df = pd.read_csv(data_path,converters={"relational_interval": literal_eval})
-
-
-#reindex users and items 
-user_id = df[["user_id"]].drop_duplicates().reindex()
-user_id["userId"] = np.arange(len(user_id))
-
-item_id = df[["item_id"]].drop_duplicates().reindex()
-item_id["itemId"] = np.arange(len(item_id))
-
-df = df.merge(user_id, on = "user_id", how = "left")
-df = df.merge(item_id, on = "item_id", how = "left")
-
-print("Range of userId is [{}, {}]".format(df.userId.min(), df.userId.max()))
-print("Range of itemId is [{}, {}]".format(df.itemId.min(), df.itemId.max()))
 
 user_pool = set(df["userId"].unique())
 item_pool = set(df["itemId"].unique())
