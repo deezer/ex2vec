@@ -59,9 +59,7 @@ class Ex2Vec(torch.nn.Module):
         base_level = torch.sum(torch.pow(delta_t, -decay) * mask, 1)
 
         # compute how much to move the user embedding
-        lamb = self.global_lamb.clamp(0.01, 10) + self.user_lamb(user_indices).squeeze(
-            -1
-        ).clamp(0.1, 10)
+        lamb = self.global_lamb.clamp(0.01, 10) + self.user_lamb(user_indices).squeeze(-1).clamp(0.1, 10)
 
         base_activation = torch.mul(base_level, lamb)
 
@@ -69,13 +67,7 @@ class Ex2Vec(torch.nn.Module):
         # move the user embedding in the direction of the item given a factor lambda
         distance = base_distance - activation  # self.lamb*distance*base_level
         # apply the quadratic funcion
-        I = (
-            self.alpha * distance
-            + self.beta * torch.pow(distance, 2)
-            + self.gamma
-            + u_bias
-            + i_bias
-        )
+        I = self.alpha * distance  + self.beta * torch.pow(distance, 2) + self.gamma + u_bias + i_bias
 
         # output the interest value
         interest = self.logistic(I)
