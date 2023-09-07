@@ -1,5 +1,4 @@
 import random
-
 import numpy as np
 import pandas as pd
 
@@ -23,13 +22,9 @@ df = df.sort_values(by="timestamp", ascending=True)
 
 # collect each user's listening history
 df["activations"] = df["timestamp"]
-df.loc[
-    df.y == 0, "activations"
-] = 99  # if the item was not consumed, the timestamp does not enter the history
+df.loc[df.y == 0, "activations"] = 99  # if the item was not consumed, the timestamp does not enter the history
 df["activations"] = df["activations"].apply(lambda x: [int(x)])
-df["activations"] = df.groupby(["userId", "itemId"], group_keys=False)[
-    "activations"
-].apply(lambda x: x.cumsum())
+df["activations"] = df.groupby(["userId", "itemId"], group_keys=False)["activations"].apply(lambda x: x.cumsum())
 
 df["relational_interval"] = df.apply(get_delta_t, axis=1)
 df["relational_interval"] = df["relational_interval"] / (60.0 * 60)  # time_scalar
