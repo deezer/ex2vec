@@ -1,6 +1,6 @@
 # Ex2Vec
 
-This repository provides our Python code to reproduce experiments from the paper **Ex2Vec: Characterizing Users and Items from the Mere Exposure Effect**, accepted for publication in the proceedings of the 17th International ACM Recommender Systems Conference (RecSys 2023). 
+This repository provides our Python code to reproduce experiments from the paper **Ex2Vec: Characterizing Users and Items from the Mere Exposure Effect**, accepted for publication in the proceedings of the 17th International ACM Recommender Systems Conference (RecSys 2023). The paper can be found [here](https://arxiv.org/abs/2311.10635).
 
 (Mere) Exposure2Vec or Ex2Vec is a model that leverages repeat consumption to characterize both users and items (in this case music tracks). 
 
