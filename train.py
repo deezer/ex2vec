@@ -31,7 +31,7 @@ config = {
 
 engine = Ex2VecEngine(config)
 
-train_loader = data_sampler.instance_a_train_loader(512)
+train_loader = data_sampler.instance_a_train_loader(config["BS"])
 eval_data = data_sampler.evaluate_data()
 
 print("started training model: ", config["alias"])
