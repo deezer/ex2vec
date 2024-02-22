@@ -74,7 +74,7 @@ class Ex2Vec(torch.nn.Module):
         return interest
 
     def load_pretrain_weights(self):
-        """Loading weights from trained GMF model"""
+        """Loading weights from trained ex2vec model"""
         config = self.config
 
         ex2vec_pre = Ex2Vec(config)
